@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="patientPage"
+             BackgroundColor="Brown"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             x:Class="Medicare.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+         
+            <Style  TargetType="Label">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Label Text=" Patient Details" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" FontSize="25" FontAttributes="Bold"/>
+    <StackLayout BindingContext="{Binding CurrentPatient}" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="20" >
+
+        <Label Text="Patient Name : " HorizontalOptions="FillAndExpand"/>
+        <Entry HorizontalOptions="FillAndExpand" Text="{Binding FullName, Mode=TwoWay}"/>
+         <Label Text="Address : " HorizontalOptions="FillAndExpand"/>
+        <Frame HasShadow="False" BorderColor="Gray">
+        <Editor HeightRequest="100" Keyboard="Plain" AutoSize="TextChanges"
+               HorizontalOptions="FillAndExpand" Text="{Binding Address, Mode=TwoWay}"/></Frame>
+         <Label Text="Email : " HorizontalOptions="FillAndExpand"/>
+        <Entry HorizontalOptions="FillAndExpand" Text="{Binding EmailAddress, Mode=TwoWay}"/>
+         <Label Text="Mobile : " HorizontalOptions="FillAndExpand"/>
+        <Entry HorizontalOptions="FillAndExpand" Text="{Binding MobileNumber, Mode=TwoWay}"/>
+
+        <Label Text="Source : " HorizontalOptions="FillAndExpand"/>
+        <Picker HorizontalOptions="FillAndExpand"
+                SelectedItem="{Binding SourceType, Mode=TwoWay}"
+                ItemsSource="{Binding  Source={x:Reference patientPage}, Path=BindingContext.Sources}" >
+   
+        </Picker>
+        <Label Text="Source Name : " HorizontalOptions="FillAndExpand"/>
+        <Entry HorizontalOptions="FillAndExpand" Text="{Binding SourceName, Mode=TwoWay}"/>
+
+    </StackLayout>
+        <Button Text="Save" BackgroundColor="DimGray" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"  WidthRequest="300"
+                Command="{Binding OnSave}"></Button>
+        </StackLayout>
+</ContentPage>
